@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: prod
+#use prod if u r sending the topic-name also in the kafkatemplate
+#use local if u dont send the topicname in the kafka template and is default created at the time of application startup
+---
+spring:
+  profile: local
+  kafka:
+    template:
+      default-topic: library-events
+    producer:
+      bootstrap-servers: localhost:9092, localhost:9093, localhost:9094
+      key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    admin:
+      properties:
+        bootstrap.servers: localhost:9092, localhost:9093, localhost:9094
+---
+spring:
+  profile: prod
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092, localhost:9093, localhost:9094
+      key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        retries: 3
+        retry.backoff.ms: 1500
+    admin:
+      properties:
+        bootstrap.servers: localhost:9092, localhost:9093, localhost:9094
+---
+spring:
+  profile: non-prod
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092, localhost:9093, localhost:9094
+      key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer

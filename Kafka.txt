@@ -1,0 +1,29 @@
+start zookeeper-server-start.bat ..\..\config\zookeeper.properties   === this means starting up the zookeeper
+start kafka-server-start.bat ..\..\config\server.properties  === this means starting up the broker. the broker id will be present in the server.properties
+start kafka-server-start.bat ..\..\config\server-1.properties
+start kafka-server-start.bat ..\..\config\server-2.properties
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test-topic --group console-consumer-29743 === starting the consumer with the consumer group
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test-topic --group console-consumer-94355
+
+kafka-console-producer.bat --broker-list localhost:9092 --topic test-topic-replicated  === starting the producer
+
+https://github.com/dilipsundarraj1/kafka-for-developers-using-spring-boot/blob/master/SetUpKafka.md
+
+https://reachmnadeem.wordpress.com/2020/08/30/kafka-2-6-up-and-running-in-windows-10/
+
+
+
+kafka-topics.bat --create --topic test-topic-replicated -zookeeper localhost:2181 --replication-factor 3 --partitions 3
+
+kafka-console-producer.bat --broker-list localhost:9092 --topic test-topic-replicated
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic library-events
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic library-events
+
+kafka-topics.bat --zookeeper localhost:2181 --list === lists all the topics
+
+
+
+https://stackoverflow.com/questions/59566982/what-happens-in-webflux-if-a-single-synchronous-call-is-made
